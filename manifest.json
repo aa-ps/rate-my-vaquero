@@ -1,0 +1,28 @@
+{
+    "manifest_version": 3,
+    "name": "Rate My Vaquero",
+    "description": "Easily see professors' ratings as you register for classes.",
+    "version": "1.0",
+    "icons": {
+        "16": "images/cowboy16.png",
+        "32": "images/cowboy32.png",
+        "48": "images/cowboy48.png",
+        "128": "images/cowboy128.png"
+    },
+    "action": {
+        "default_icon": {
+            "16": "images/cowboy16.png",
+            "32": "images/cowboy32.png",
+            "48": "images/cowboy48.png",
+            "128": "images/cowboy128.png"
+        },
+        "default_title": "Click Me",
+        "default_popup": ""
+    },
+    "content_scripts": [
+        {
+            "js": ["scripts/main.js"],
+            "matches": ["https://www.utrgv.edu/*"]
+        }
+    ]
+}
