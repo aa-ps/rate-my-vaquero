@@ -1,5 +1,0 @@
-Names:
-    Vaquero Portal
-Features:
-    Professor Rating
-    Blackboard Grades
