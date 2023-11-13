@@ -30,7 +30,7 @@
         "/scripts/main.js"
       ],
       "matches": [
-        "https://assist.utrgv.edu/*"
+        "https://assist.utrgv.edu/StudentRegistrationSsb/ssb/classRegistration/classRegistration/*"
       ]
     }
   ]
