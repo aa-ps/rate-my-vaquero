@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
   const toggleSwitch = document.getElementById("toggle");
 
-  chrome.storage.local.get("enabled", ({ enabled }) => (toggleSwitch.checked = enabled));
+  chrome.storage.sync.get("enabled", ({ enabled }) => (toggleSwitch.checked = enabled));
 
   toggleSwitch.addEventListener("change", () => {
     const { checked: enabled } = toggleSwitch;
-    chrome.storage.local.set({ enabled });
+    chrome.storage.sync.set({ enabled });
   });
 });
