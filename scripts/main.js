@@ -77,17 +77,25 @@ function formatName(name) {
 
 function insertRating(professor, professorElement) {
   observer.disconnect();
-  let { avgRating, numRatings } = professor;
+  if (professorElement.querySelector(".rating")) {
+    observer.observe(SEARCH_TABLE, {
+      subtree: true,
+      childList: true,
+    });
+    return;
+  }
 
+  let { avgRating, numRatings } = professor;
   let percentage = (avgRating / 5) * 100;
 
   let ratingDisplay = `<div title="${
     numRatings == 0 ? "No Ratings" : avgRating
-  }"class="rating">
+  }" class="rating">
   <div class="rating-upper" style="width: ${percentage}%">
       <span>★</span>
       <span>★</span>
       <span>★</span>
+      <span
       <span>★</span>
       <span>★</span>
   </div>
@@ -100,17 +108,15 @@ function insertRating(professor, professorElement) {
   </div>
 </div>`;
   professorElement.innerHTML += ratingDisplay;
+
   observer.observe(SEARCH_TABLE, {
     subtree: true,
     childList: true,
   });
 }
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 async function displayRatings(searchTable) {
+  observer.disconnect();
   const { professorElements, professorNames } = getProfessors(searchTable);
   for (let i = 0; i < professorNames.length; i++) {
     const name = formatName(professorNames[i]);
@@ -120,12 +126,29 @@ async function displayRatings(searchTable) {
       await sleep(500);
     }
   }
+  observer.observe(SEARCH_TABLE, { subtree: true, childList: true });
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
-const observer = new MutationObserver(() => displayRatings(SEARCH_TABLE));
+function debounce(func, wait) {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+}
+
+const debouncedDisplayRatings = debounce(displayRatings, 300);
+
+const observer = new MutationObserver(() =>
+  debouncedDisplayRatings(SEARCH_TABLE)
+);
 
 chrome.storage.sync.get("enabled", ({ enabled }) => {
-  if (enabled)
+  if (enabled) {
     observer.observe(SEARCH_TABLE, { subtree: true, childList: true });
+  }
 });

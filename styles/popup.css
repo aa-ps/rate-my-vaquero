@@ -1,11 +1,15 @@
 html,
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  font-family: 'Roboto', sans-serif;
+  background-color: #eef2f3;
   margin: 0;
-  padding: 5px;
+  padding: 10px;
   width: 300px;
-  height: 100px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 h1 {
@@ -13,23 +17,33 @@ h1 {
   text-align: center;
   margin: 0;
   padding: 10px 0;
-  text-decoration: underline;
+  font-size: 18px;
+  font-weight: 500;
+  border-bottom: 1px solid #ddd;
 }
 
 label {
   margin: 10px 0;
-  text-align: center;
+  font-size: 14px;
+}
+
+.setting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0;
 }
 
 input[type="checkbox"] {
-  position: relative;
   appearance: none;
   width: 40px;
   height: 20px;
   background: #ccc;
   border-radius: 20px;
-  cursor: pointer;
+  position: relative;
   outline: none;
+  cursor: pointer;
   transition: background-color 0.3s;
 }
 
@@ -54,15 +68,9 @@ input[type="checkbox"]:checked::before {
   background-color: #fff;
 }
 
-#status{
-    font-family: Arial, sans-serif;
-    color: #333;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.setting{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+#status {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
 }
